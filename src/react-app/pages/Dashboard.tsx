@@ -60,7 +60,7 @@ export default function Dashboard() {
   const getUsageColor = (percentage: number) => {
     if (percentage >= 90) return 'from-red-500 to-red-600';
     if (percentage >= 70) return 'from-yellow-500 to-yellow-600';
-    return 'from-primary to-primary/80';
+    return 'from-blue-500 to-blue-600'; // Corregido: antes era primary
   };
 
   if (loading) {
@@ -68,9 +68,9 @@ export default function Dashboard() {
       <Layout>
         <div className="flex items-center justify-center h-64">
           <div className="relative">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <Activity className="w-5 h-5 text-primary animate-pulse" />
+              <Activity className="w-5 h-5 text-blue-600 animate-pulse" />
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function Dashboard() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-              <Activity className="w-8 h-8 mr-3 text-primary" />
+              <Activity className="w-8 h-8 mr-3 text-blue-600" />
               Dashboard
             </h1>
             <p className="text-gray-600 mt-1">Bienvenido de vuelta, {user?.name}</p>
@@ -98,10 +98,10 @@ export default function Dashboard() {
         {/* 1. Plan Status Cards - Suscripciones, Empleados y Planes creados */}
         {metrics && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl shadow-sm border border-primary/20 p-6 hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl shadow-sm border border-blue-100 p-6 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-md">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-md">
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900">Suscripciones</h3>
@@ -117,14 +117,14 @@ export default function Dashboard() {
                 ></div>
               </div>
               <p className="text-sm text-gray-600 font-medium">
-                Uso actual: <span className="text-primary">{usagePercentage.toFixed(1)}%</span> de tu límite
+                Uso actual: <span className="text-blue-600">{usagePercentage.toFixed(1)}%</span> de tu límite
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-secondary/20 p-6 hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl shadow-sm border border-purple-100 p-6 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-gradient-to-br from-secondary to-secondary/80 rounded-xl shadow-md">
+                  <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-md">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900">Empleados</h3>
@@ -135,12 +135,12 @@ export default function Dashboard() {
               </div>
               <div className="w-full bg-gray-100 rounded-full h-3 mb-3 overflow-hidden">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-500 bg-gradient-to-r ${employeePercentage >= 90 ? 'from-red-500 to-red-600' : employeePercentage >= 70 ? 'from-yellow-500 to-yellow-600' : 'from-secondary to-secondary/80'} shadow-md`}
+                  className={`h-3 rounded-full transition-all duration-500 bg-gradient-to-r ${employeePercentage >= 90 ? 'from-red-500 to-red-600' : employeePercentage >= 70 ? 'from-yellow-500 to-yellow-600' : 'from-purple-500 to-purple-600'} shadow-md`}
                   style={{ width: `${employeePercentage}%` }}
                 ></div>
               </div>
               <p className="text-sm text-gray-600 font-medium">
-                Uso actual: <span className="text-secondary">{employeePercentage.toFixed(1)}%</span> de tu límite
+                Uso actual: <span className="text-purple-600">{employeePercentage.toFixed(1)}%</span> de tu límite
               </p>
             </div>
 
