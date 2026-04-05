@@ -136,7 +136,7 @@ export default function SaasPlans() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
       </Layout>
     );
@@ -154,7 +154,7 @@ export default function SaasPlans() {
           <div className="mt-4 lg:mt-0">
             <button 
               onClick={() => setShowAddModal(true)}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <Plus className="w-4 h-4 mr-2" />
               Nuevo Plan
@@ -223,7 +223,7 @@ export default function SaasPlans() {
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => setEditingPlan(plan)}
-                          className="text-primary hover:opacity-80 transition-opacity"
+                          className="text-blue-600 hover:text-blue-800"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
@@ -353,7 +353,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -362,7 +362,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
               <select
                 value={formData.duration_months}
                 onChange={(e) => setFormData({ ...formData, duration_months: parseInt(e.target.value) })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 {Array.from({ length: 36 }, (_, i) => i + 1).map(month => (
                   <option key={month} value={month}>
@@ -380,9 +380,11 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 required
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
+
+            
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Límite de Suscripciones</label>
@@ -391,7 +393,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 required
                 value={formData.subscription_limit}
                 onChange={(e) => setFormData({ ...formData, subscription_limit: parseInt(e.target.value) })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -402,7 +404,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 required
                 value={formData.employee_limit}
                 onChange={(e) => setFormData({ ...formData, employee_limit: parseInt(e.target.value) })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
               <p className="text-sm text-gray-500 mt-1">
                 Número máximo de empleados que puede crear el administrador
@@ -416,7 +418,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 required
                 value={formData.plan_limit}
                 onChange={(e) => setFormData({ ...formData, plan_limit: parseInt(e.target.value) })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
               <p className="text-sm text-gray-500 mt-1">
                 Número máximo de planes que puede crear el administrador
@@ -429,7 +431,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
                 value={formData.benefits}
                 onChange={(e) => setFormData({ ...formData, benefits: e.target.value })}
                 rows={3}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Describe los beneficios del plan..."
               />
             </div>
@@ -438,14 +440,14 @@ function PlanModal({ plan, onClose, onSuccess }: { plan: SaasPlan | null; onClos
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity"
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50"
               >
                 {loading ? 'Guardando...' : (plan ? 'Actualizar' : 'Crear Plan')}
               </button>

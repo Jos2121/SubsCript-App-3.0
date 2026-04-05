@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Users, DollarSign, AlertTriangle, BarChart3, Target, Award } from 'lucide-react';
+import { Users, DollarSign, AlertTriangle, BarChart3 } from 'lucide-react';
 import { useAuth, apiCall } from '@/react-app/hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Layout from '@/react-app/components/Layout';
-import { usePlatformSettings } from '@/react-app/hooks/usePlatformSettings';
 
 interface DashboardMetrics {
   plan_name: string;
@@ -26,7 +25,6 @@ interface DashboardMetrics {
 
 export default function AdminDashboard() {
   const { user } = useAuth();
-  const { settings } = usePlatformSettings();
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -73,7 +71,7 @@ export default function AdminDashboard() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
       </Layout>
     );
@@ -93,12 +91,7 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-[#DBEAFE] rounded-xl">
-                    <Target className="w-6 h-6 text-[#2563EB]" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Suscripciones</h3>
-                </div>
+                <h3 className="text-lg font-medium text-gray-900">Suscripciones</h3>
                 <span className="text-sm text-gray-500">
                   {metrics.current_usage} / {metrics.plan_limit || '∞'}
                 </span>
@@ -119,12 +112,7 @@ export default function AdminDashboard() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-[#D1FAE5] rounded-xl">
-                    <Users className="w-6 h-6 text-[#059669]" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Empleados</h3>
-                </div>
+                <h3 className="text-lg font-medium text-gray-900">Empleados</h3>
                 <span className="text-sm text-gray-500">
                   {metrics.employee_count} / {metrics.employee_limit || '∞'}
                 </span>
@@ -145,12 +133,7 @@ export default function AdminDashboard() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-[#F3E8FF] rounded-xl">
-                    <Award className="w-6 h-6 text-[#9333EA]" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Planes</h3>
-                </div>
+                <h3 className="text-lg font-medium text-gray-900">Planes</h3>
                 <span className="text-sm text-gray-500">
                   {metrics.plans_count} / {metrics.plan_creation_limit || '∞'}
                 </span>
@@ -171,12 +154,11 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Tarjetas de Métricas Inferiores */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-[#D1FAE5] rounded-lg">
-                <Users className="w-6 h-6 text-[#059669]" />
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Users className="w-6 h-6 text-green-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Suscripciones Activas</p>
@@ -187,8 +169,8 @@ export default function AdminDashboard() {
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-[#FEE2E2] rounded-lg">
-                <AlertTriangle className="w-6 h-6 text-[#DC2626]" />
+              <div className="p-2 bg-red-100 rounded-lg">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Suscripciones Vencidas</p>
@@ -199,8 +181,8 @@ export default function AdminDashboard() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-[#DBEAFE] rounded-lg">
-                <DollarSign className="w-6 h-6 text-[#2563EB]" />
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <DollarSign className="w-6 h-6 text-blue-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ganancias del Día</p>
@@ -211,8 +193,8 @@ export default function AdminDashboard() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-[#F3E8FF] rounded-lg">
-                <DollarSign className="w-6 h-6 text-[#9333EA]" />
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <DollarSign className="w-6 h-6 text-purple-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ganancias del Mes</p>
@@ -232,7 +214,7 @@ export default function AdminDashboard() {
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {yearOptions.map(year => (
                   <option key={year} value={year}>{year}</option>
@@ -257,7 +239,7 @@ export default function AdminDashboard() {
                   />
                   <Bar 
                     dataKey="earnings" 
-                    fill={settings.primary_color || '#10B981'} 
+                    fill="#10B981" 
                     radius={[4, 4, 0, 0]} 
                     barSize={40}
                   />

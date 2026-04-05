@@ -204,7 +204,7 @@ export default function MyAccount() {
       case 'active':
         return { status: 'Activa', color: 'text-green-900', bgColor: 'bg-green-50' };
       case 'pending':
-        return { status: 'Pendiente', color: 'text-primary-900', bgColor: 'bg-primary/10' };
+        return { status: 'Pendiente', color: 'text-blue-900', bgColor: 'bg-blue-50' };
       default:
         return { status: 'Sin información', color: 'text-gray-900', bgColor: 'bg-gray-50' };
     }
@@ -230,7 +230,7 @@ export default function MyAccount() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
       </Layout>
     );
@@ -253,9 +253,9 @@ export default function MyAccount() {
             <nav className="flex space-x-4 px-6">
               <button
                 onClick={() => setActiveTab('profile')}
-                className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm ${
                   activeTab === 'profile'
-                    ? 'border-primary text-primary'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -266,9 +266,9 @@ export default function MyAccount() {
               {user?.role === 'admin' && (
                 <button
                   onClick={() => setActiveTab('subscription')}
-                  className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                  className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm ${
                     activeTab === 'subscription'
-                      ? 'border-primary text-primary'
+                      ? 'border-blue-500 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -295,7 +295,7 @@ export default function MyAccount() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
 
@@ -308,7 +308,7 @@ export default function MyAccount() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
 
@@ -320,7 +320,7 @@ export default function MyAccount() {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
 
@@ -333,7 +333,7 @@ export default function MyAccount() {
                           type="text"
                           value={formData.organization_name}
                           onChange={(e) => setFormData({ ...formData, organization_name: e.target.value })}
-                          className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                          className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         />
                       </div>
                     )}
@@ -351,7 +351,7 @@ export default function MyAccount() {
                         type="password"
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Dejar vacío para mantener la actual"
                       />
                     </div>
@@ -364,7 +364,7 @@ export default function MyAccount() {
                         type="password"
                         value={formData.confirmPassword}
                         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary transition-all"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Confirma la nueva contraseña"
                       />
                     </div>
@@ -382,7 +382,7 @@ export default function MyAccount() {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-opacity"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                   >
                     <Save className="w-4 h-4 mr-2" />
                     {saving ? 'Guardando...' : 'Guardar Cambios'}
@@ -399,7 +399,7 @@ export default function MyAccount() {
                     <h3 className="text-lg font-semibold text-gray-900">Suscripción Activa</h3>
                     <button
                       onClick={() => setShowUpgradePlans(!showUpgradePlans)}
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Mejorar Plan
@@ -407,9 +407,9 @@ export default function MyAccount() {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="p-4 bg-primary/10 rounded-lg">
+                    <div className="p-4 bg-blue-50 rounded-lg">
                       <h4 className="text-sm font-medium text-gray-700">Plan</h4>
-                      <p className="text-lg font-semibold text-primary">{profile.plan_name || 'Sin Plan'}</p>
+                      <p className="text-lg font-semibold text-blue-900">{profile.plan_name || 'Sin Plan'}</p>
                     </div>
                     
                     <div className="p-4 bg-green-50 rounded-lg">
@@ -459,7 +459,7 @@ export default function MyAccount() {
 
                 {/* Upgrade Plans Modal */}
                 {showUpgradePlans && (
-                  <div className="border-t border-gray-200 pt-6 animate-slide-in">
+                  <div className="border-t border-gray-200 pt-6">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-gray-900">Planes Disponibles</h3>
                       <button
@@ -474,7 +474,7 @@ export default function MyAccount() {
                       {availablePlans.map((plan) => (
                         <div key={plan.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
                           <h4 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h4>
-                          <p className="text-3xl font-bold text-primary mb-4">
+                          <p className="text-3xl font-bold text-blue-600 mb-4">
                             S/ {plan.price}
                             <span className="text-sm text-gray-500 font-normal">/{getDurationText(plan.duration_months)}</span>
                           </p>
@@ -502,7 +502,7 @@ export default function MyAccount() {
                           
                           <button
                             onClick={() => handleUpgradePlan(plan)}
-                            className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary transition-opacity"
+                            className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                           >
                             <MessageCircle className="w-4 h-4 mr-2" />
                             Obtener Plan
@@ -522,7 +522,7 @@ export default function MyAccount() {
                 {/* Payment Instructions */}
                 <div className="border-t border-gray-200 pt-6">
                   <div className="flex items-center space-x-3 mb-6">
-                    <CreditCard className="w-6 h-6 text-primary" />
+                    <CreditCard className="w-6 h-6 text-blue-600" />
                     <h3 className="text-lg font-semibold text-gray-900">Facturación y Pagos</h3>
                   </div>
 
@@ -530,8 +530,8 @@ export default function MyAccount() {
                   <div className="mb-6">
                     <h4 className="text-md font-medium text-gray-900 mb-4">Instrucciones de Pago</h4>
                     <div className="space-y-4">
-                      <div className="flex items-start space-x-3 p-4 bg-primary/10 rounded-lg border border-primary/20">
-                        <div className="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold">
+                      <div className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
+                        <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
                           1
                         </div>
                         <div className="flex-1">
@@ -541,8 +541,8 @@ export default function MyAccount() {
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-4 bg-secondary/10 rounded-lg border border-secondary/20">
-                        <div className="flex-shrink-0 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
+                      <div className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
+                        <div className="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
                           2
                         </div>
                         <div className="flex-1">
@@ -552,8 +552,8 @@ export default function MyAccount() {
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg border border-green-200">
-                        <div className="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
+                      <div className="flex items-start space-x-3 p-4 bg-purple-50 rounded-lg">
+                        <div className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">
                           3
                         </div>
                         <div className="flex-1">

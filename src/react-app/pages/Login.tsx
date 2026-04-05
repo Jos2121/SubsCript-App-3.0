@@ -67,7 +67,7 @@ export default function Login() {
 
   if (settingsLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/20 via-gray-50 to-secondary/20 flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-primary/10 via-gray-50 to-secondary/10 flex flex-col items-center justify-center p-4">
         <Loader2 className="w-12 h-12 text-primary animate-spin" />
       </div>
     );
@@ -178,7 +178,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/20 via-gray-50 to-secondary/20 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-gray-50 to-secondary/10 flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
