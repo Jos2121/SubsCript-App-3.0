@@ -98,10 +98,7 @@ export default function AdminDashboard() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    usagePercentage >= 90 ? 'bg-red-500' : 
-                    usagePercentage >= 70 ? 'bg-yellow-500' : 'bg-green-500'
-                  }`}
+                  className={`h-3 rounded-full transition-all duration-300 ${usagePercentage >= 90 ? 'bg-red-500' : usagePercentage >= 70 ? 'bg-yellow-500' : 'bg-green-500'}`}
                   style={{ width: `${usagePercentage}%` }}
                 ></div>
               </div>
@@ -119,10 +116,7 @@ export default function AdminDashboard() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    employeePercentage >= 90 ? 'bg-red-500' : 
-                    employeePercentage >= 70 ? 'bg-yellow-500' : 'bg-blue-500'
-                  }`}
+                  className={`h-3 rounded-full transition-all duration-300 ${employeePercentage >= 90 ? 'bg-red-500' : employeePercentage >= 70 ? 'bg-yellow-500' : 'bg-blue-500'}`}
                   style={{ width: `${employeePercentage}%` }}
                 ></div>
               </div>
@@ -140,10 +134,7 @@ export default function AdminDashboard() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    plansPercentage >= 90 ? 'bg-red-500' : 
-                    plansPercentage >= 70 ? 'bg-yellow-500' : 'bg-purple-500'
-                  }`}
+                  className={`h-3 rounded-full transition-all duration-300 ${plansPercentage >= 90 ? 'bg-red-500' : plansPercentage >= 70 ? 'bg-yellow-500' : 'bg-purple-500'}`}
                   style={{ width: `${plansPercentage}%` }}
                 ></div>
               </div>
