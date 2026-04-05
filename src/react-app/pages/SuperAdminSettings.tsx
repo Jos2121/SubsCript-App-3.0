@@ -12,6 +12,8 @@ interface PlatformSettings {
   logo_url: string;
   favicon_url: string;
   page_title: string;
+  primary_color?: string;
+  secondary_color?: string;
 }
 
 interface PaymentMethod {
@@ -36,7 +38,9 @@ export default function SuperAdminSettings() {
     logo_url: '',
     favicon_url: '',
     page_title: 'Isites Pro',
-    enable_free_registration: true
+    enable_free_registration: true,
+    primary_color: '#2563eb',
+    secondary_color: '#9333ea'
   });
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -66,7 +70,11 @@ export default function SuperAdminSettings() {
   useEffect(() => {
     // Update local settings when platform settings are loaded
     if (!platformLoading && platformSettings) {
-      setSettings(platformSettings);
+      setSettings({
+        ...platformSettings,
+        primary_color: platformSettings.primary_color || '#2563eb',
+        secondary_color: platformSettings.secondary_color || '#9333ea'
+      });
     }
   }, [platformSettings, platformLoading]);
 
@@ -178,7 +186,7 @@ export default function SuperAdminSettings() {
     <Layout>
       <div className="space-y-6">
         <div className="flex items-center space-x-3">
-          <SettingsIcon className="w-8 h-8 text-blue-600" />
+          <SettingsIcon className="w-8 h-8 text-primary" />
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Configuraciones</h1>
             <p className="text-gray-600">Gestiona la plataforma y configuraciones globales</p>
@@ -196,7 +204,7 @@ export default function SuperAdminSettings() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap ${
                       activeTab === tab.id
-                        ? 'border-blue-500 text-blue-600'
+                        ? 'border-primary text-primary'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -211,7 +219,7 @@ export default function SuperAdminSettings() {
           <div className="p-6">
             {platformLoading ? (
               <div className="flex items-center justify-center h-32">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               </div>
             ) : (
               <>
@@ -229,7 +237,7 @@ export default function SuperAdminSettings() {
                             type="text"
                             value={settings.platform_name}
                             onChange={(e) => setSettings({ ...settings, platform_name: e.target.value })}
-                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                           />
                         </div>
 
@@ -241,7 +249,7 @@ export default function SuperAdminSettings() {
                             type="text"
                             value={settings.page_title}
                             onChange={(e) => setSettings({ ...settings, page_title: e.target.value })}
-                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                           />
                         </div>
 
@@ -253,7 +261,7 @@ export default function SuperAdminSettings() {
                             type="url"
                             value={settings.logo_url}
                             onChange={(e) => setSettings({ ...settings, logo_url: e.target.value })}
-                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                             placeholder="https://example.com/logo.png"
                           />
                         </div>
@@ -266,9 +274,51 @@ export default function SuperAdminSettings() {
                             type="url"
                             value={settings.favicon_url}
                             onChange={(e) => setSettings({ ...settings, favicon_url: e.target.value })}
-                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                             placeholder="https://example.com/favicon.ico"
                           />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Color Primario
+                          </label>
+                          <div className="flex items-center space-x-3">
+                            <input
+                              type="color"
+                              value={settings.primary_color}
+                              onChange={(e) => setSettings({ ...settings, primary_color: e.target.value })}
+                              className="h-10 w-14 p-1 border border-gray-300 rounded cursor-pointer"
+                            />
+                            <input
+                              type="text"
+                              value={settings.primary_color}
+                              onChange={(e) => setSettings({ ...settings, primary_color: e.target.value })}
+                              className="block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary uppercase"
+                              placeholder="#2563eb"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Color Secundario
+                          </label>
+                          <div className="flex items-center space-x-3">
+                            <input
+                              type="color"
+                              value={settings.secondary_color}
+                              onChange={(e) => setSettings({ ...settings, secondary_color: e.target.value })}
+                              className="h-10 w-14 p-1 border border-gray-300 rounded cursor-pointer"
+                            />
+                            <input
+                              type="text"
+                              value={settings.secondary_color}
+                              onChange={(e) => setSettings({ ...settings, secondary_color: e.target.value })}
+                              className="block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary uppercase"
+                              placeholder="#9333ea"
+                            />
+                          </div>
                         </div>
 
                         <div className="md:col-span-2">
@@ -279,7 +329,7 @@ export default function SuperAdminSettings() {
                             type="tel"
                             value={settings.support_phone}
                             onChange={(e) => setSettings({ ...settings, support_phone: e.target.value })}
-                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                             placeholder="+51 999 999 999"
                           />
                           <p className="mt-1 text-sm text-gray-500">
@@ -293,7 +343,7 @@ export default function SuperAdminSettings() {
                               type="checkbox"
                               checked={settings.enable_free_registration || false}
                               onChange={(e) => setSettings({ ...settings, enable_free_registration: e.target.checked })}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                             />
                             <div>
                               <span className="text-sm font-medium text-gray-700">Habilitar Registro Gratuito</span>
@@ -310,10 +360,10 @@ export default function SuperAdminSettings() {
                       <button
                         type="submit"
                         disabled={saving || saveSuccess}
-                        className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed ${
+                        className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed transition-opacity ${
                           saveSuccess 
                             ? 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
-                            : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 disabled:opacity-50'
+                            : 'bg-primary hover:opacity-90 focus:ring-primary disabled:opacity-50'
                         }`}
                       >
                         {saveSuccess ? (
@@ -345,7 +395,7 @@ export default function SuperAdminSettings() {
                       <div className="mt-4 lg:mt-0">
                         <button 
                           onClick={() => setShowAddPaymentModal(true)}
-                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
                           <Plus className="w-4 h-4 mr-2" />
                           Nuevo Método
@@ -355,7 +405,7 @@ export default function SuperAdminSettings() {
 
                     {loadingPayments ? (
                       <div className="flex items-center justify-center h-32">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                       </div>
                     ) : (
                       <>
@@ -365,13 +415,13 @@ export default function SuperAdminSettings() {
                               <div key={method.id} className="bg-white border border-gray-200 rounded-lg p-4">
                                 <div className="flex justify-between items-start mb-3">
                                   <div className="flex items-center space-x-2">
-                                    <CreditCard className="w-5 h-5 text-blue-600" />
+                                    <CreditCard className="w-5 h-5 text-primary" />
                                     <h4 className="text-lg font-medium text-gray-900">{method.name}</h4>
                                   </div>
                                   <div className="flex space-x-1">
                                     <button 
                                       onClick={() => setEditingPaymentMethod(method)} 
-                                      className="text-blue-600 hover:text-blue-800"
+                                      className="text-primary hover:opacity-80"
                                     >
                                       <Edit2 className="w-4 h-4" />
                                     </button>
@@ -528,7 +578,7 @@ function PaymentMethodModal({
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -537,7 +587,7 @@ function PaymentMethodModal({
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               >
                 <option value="digital_wallet">Billetera Digital</option>
                 <option value="bank_account">Cuenta Bancaria</option>
@@ -551,7 +601,7 @@ function PaymentMethodModal({
                   type="url"
                   value={formData.qr_image_url}
                   onChange={(e) => setFormData({ ...formData, qr_image_url: e.target.value })}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
                 />
               </div>
             )}
@@ -562,7 +612,7 @@ function PaymentMethodModal({
                 type="text"
                 value={formData.account_number}
                 onChange={(e) => setFormData({ ...formData, account_number: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -574,7 +624,7 @@ function PaymentMethodModal({
                     type="text"
                     value={formData.account_holder}
                     onChange={(e) => setFormData({ ...formData, account_holder: e.target.value })}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
                   />
                 </div>
                 <div>
@@ -583,7 +633,7 @@ function PaymentMethodModal({
                     type="text"
                     value={formData.bank_name}
                     onChange={(e) => setFormData({ ...formData, bank_name: e.target.value })}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
                   />
                 </div>
               </>
@@ -600,7 +650,7 @@ function PaymentMethodModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? 'Guardando...' : (paymentMethod ? 'Actualizar' : 'Crear')}
               </button>

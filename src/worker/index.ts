@@ -1516,7 +1516,9 @@ app.get("/api/admin/customization", async (c) => {
         platform_name: cust.platform_name || 'Isites Pro',
         logo_url: cust.logo_url || '',
         favicon_url: cust.favicon_url || '',
-        page_title: cust.page_title || 'Isites Pro'
+        page_title: cust.page_title || 'Isites Pro',
+        primary_color: cust.primary_color || '#2563eb',
+        secondary_color: cust.secondary_color || '#9333ea'
       } 
     });
   } catch (error) {
@@ -1538,7 +1540,9 @@ app.get("/api/platform-customization", async (c) => {
       logo_url: cust.logo_url || '',
       favicon_url: cust.favicon_url || '',
       page_title: cust.page_title || 'Isites Pro',
-      enable_free_registration: freeRegRes[0]?.setting_value === '1'
+      enable_free_registration: freeRegRes[0]?.setting_value === '1',
+      primary_color: cust.primary_color || '#2563eb',
+      secondary_color: cust.secondary_color || '#9333ea'
     }});
   } catch (error) {
     console.error(error);
@@ -1559,7 +1563,9 @@ app.get("/api/superadmin/platform-customization", async (c) => {
       logo_url: cust.logo_url || '',
       favicon_url: cust.favicon_url || '',
       page_title: cust.page_title || 'Isites Pro',
-      enable_free_registration: freeRegRes[0]?.setting_value === '1'
+      enable_free_registration: freeRegRes[0]?.setting_value === '1',
+      primary_color: cust.primary_color || '#2563eb',
+      secondary_color: cust.secondary_color || '#9333ea'
     }});
   } catch (error) {
     console.error(error);
@@ -1569,11 +1575,22 @@ app.get("/api/superadmin/platform-customization", async (c) => {
 
 app.put("/api/superadmin/platform-customization", async (c) => {
   try {
-    const { support_phone, platform_name, logo_url, favicon_url, page_title, enable_free_registration } = await c.req.json();
+    const { support_phone, platform_name, logo_url, favicon_url, page_title, enable_free_registration, primary_color, secondary_color } = await c.req.json();
     
+    // Migración automática de columnas para colores dinámicos por si no existen
+    try {
+      await sql`ALTER TABLE platform_customization ADD COLUMN IF NOT EXISTS primary_color VARCHAR(20) DEFAULT '#2563eb'`;
+      await sql`ALTER TABLE platform_customization ADD COLUMN IF NOT EXISTS secondary_color VARCHAR(20) DEFAULT '#9333ea'`;
+    } catch(e) {
+      // Si la BD restringe ALTER, omitimos el error y continúa
+    }
+
     const existing = await sql`SELECT id FROM platform_customization WHERE setting_type = 'superadmin' AND organization_id IS NULL LIMIT 1`;
-    if (existing.length > 0) await sql`UPDATE platform_customization SET platform_name=${platform_name}, logo_url=${logo_url}, favicon_url=${favicon_url}, page_title=${page_title} WHERE id=${existing[0].id}`;
-    else await sql`INSERT INTO platform_customization (setting_type, platform_name, logo_url, favicon_url, page_title) VALUES ('superadmin', ${platform_name}, ${logo_url}, ${favicon_url}, ${page_title})`;
+    if (existing.length > 0) {
+      await sql`UPDATE platform_customization SET platform_name=${platform_name}, logo_url=${logo_url}, favicon_url=${favicon_url}, page_title=${page_title}, primary_color=${primary_color || '#2563eb'}, secondary_color=${secondary_color || '#9333ea'} WHERE id=${existing[0].id}`;
+    } else {
+      await sql`INSERT INTO platform_customization (setting_type, platform_name, logo_url, favicon_url, page_title, primary_color, secondary_color) VALUES ('superadmin', ${platform_name}, ${logo_url}, ${favicon_url}, ${page_title}, ${primary_color || '#2563eb'}, ${secondary_color || '#9333ea'})`;
+    }
     
     const upsertSetting = async (key: string, val: string) => {
       const e = await sql`SELECT id FROM platform_settings WHERE setting_key = ${key} LIMIT 1`;

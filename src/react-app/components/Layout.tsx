@@ -17,7 +17,7 @@ function PlatformLogo() {
   }
 
   return (
-    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md flex-shrink-0">
+    <div className="w-10 h-10 bg-gradient-to-br from-primary via-primary to-secondary rounded-lg flex items-center justify-center shadow-md flex-shrink-0">
       <span className="text-white font-bold text-lg">IP</span>
     </div>
   );
@@ -119,12 +119,12 @@ export default function Layout({ children }: LayoutProps) {
                 to={item.href}
                 className={`flex items-center px-3 py-3 rounded-xl transition-all duration-200 group/item ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
+                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md'
                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
                 title={item.name}
               >
-                <Icon className={`w-6 h-6 flex-shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-500 group-hover/item:text-blue-600'}`} />
+                <Icon className={`w-6 h-6 flex-shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-500 group-hover/item:text-primary'}`} />
                 <span className="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                   {item.name}
                 </span>
@@ -136,7 +136,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* User Info & Logout */}
         <div className="p-3 border-t border-gray-100 mt-auto flex-shrink-0 w-full overflow-hidden bg-gray-50/50">
           <div className="flex items-center px-3 py-2 mb-2">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold flex-shrink-0 shadow-sm">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0 shadow-sm">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="ml-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden">
@@ -168,7 +168,7 @@ export default function Layout({ children }: LayoutProps) {
         </Link>
         <button
           onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
           aria-label="Abrir menú"
         >
           <Menu className="w-6 h-6" />
@@ -219,7 +219,7 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
+                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
@@ -234,7 +234,7 @@ export default function Layout({ children }: LayoutProps) {
 
         <div className="p-5 border-t border-gray-100 bg-gray-50/50">
           <div className="flex items-center mb-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold shadow-sm">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="ml-3 overflow-hidden">

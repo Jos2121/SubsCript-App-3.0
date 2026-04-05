@@ -8,6 +8,8 @@ interface PlatformSettings {
   favicon_url: string;
   page_title: string;
   enable_free_registration?: boolean;
+  primary_color?: string;
+  secondary_color?: string;
 }
 
 interface PlatformSettingsContextType {
@@ -22,7 +24,9 @@ const defaultSettings: PlatformSettings = {
   logo_url: '',
   favicon_url: '',
   page_title: 'Isites Pro',
-  enable_free_registration: false
+  enable_free_registration: false,
+  primary_color: '#2563eb',
+  secondary_color: '#9333ea'
 };
 
 // Obtenemos los ajustes cacheados si existen para que React arranque con ellos
@@ -62,7 +66,9 @@ export function PlatformSettingsProvider({ children }: { children: ReactNode }) 
           logo_url: data.settings.logo_url || defaultSettings.logo_url,
           favicon_url: data.settings.favicon_url || defaultSettings.favicon_url,
           page_title: data.settings.page_title || defaultSettings.page_title,
-          enable_free_registration: data.settings.enable_free_registration
+          enable_free_registration: data.settings.enable_free_registration,
+          primary_color: data.settings.primary_color || defaultSettings.primary_color,
+          secondary_color: data.settings.secondary_color || defaultSettings.secondary_color
         };
         
         setSettings(newSettings);
@@ -87,6 +93,13 @@ export function PlatformSettingsProvider({ children }: { children: ReactNode }) 
       }
       if (settings.favicon_url) {
         updateFavicon(settings.favicon_url);
+      }
+      // Inyectar variables CSS globales
+      if (settings.primary_color) {
+        document.documentElement.style.setProperty('--color-primary', settings.primary_color);
+      }
+      if (settings.secondary_color) {
+        document.documentElement.style.setProperty('--color-secondary', settings.secondary_color);
       }
     }
   }, [settings, loading]);
