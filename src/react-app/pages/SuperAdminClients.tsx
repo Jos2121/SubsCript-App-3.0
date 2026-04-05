@@ -693,9 +693,6 @@ function NewSubscriptionModal({ onClose, onSuccess }: { onClose: () => void; onS
     phone: '',
     plan_id: '',
     organization_name: '',
-    timezone: 'America/Lima',
-    currency: 'PEN',
-    country_code: '+51',
     start_date: getTodayInputValue()
   });
   const [discount, setDiscount] = useState<number | ''>('');
@@ -775,7 +772,7 @@ function NewSubscriptionModal({ onClose, onSuccess }: { onClose: () => void; onS
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Nombre del Administrador</label>
+              <label className="block text-sm font-medium text-gray-700">Nombre</label>
               <input
                 type="text"
                 required
@@ -851,59 +848,6 @@ function NewSubscriptionModal({ onClose, onSuccess }: { onClose: () => void; onS
                   Total a cobrar: S/ {totalToCharge.toFixed(2)}
                 </p>
               )}
-            </div>
-
-            <div className="border-t border-gray-200 my-4 pt-4">
-              <h4 className="text-sm font-semibold text-gray-900 mb-3">Configuración de la Organización</h4>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Moneda</label>
-                  <select
-                    required
-                    value={formData.currency}
-                    onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
-                  >
-                    <option value="PEN">PEN - Soles Peruanos</option>
-                    <option value="USD">USD - Dólares</option>
-                    <option value="MXN">MXN - Pesos Mexicanos</option>
-                    <option value="EUR">EUR - Euros</option>
-                    <option value="COP">COP - Pesos Colombianos</option>
-                    <option value="CLP">CLP - Pesos Chilenos</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Zona Horaria</label>
-                  <select
-                    required
-                    value={formData.timezone}
-                    onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
-                  >
-                    <option value="America/Lima">América / Lima</option>
-                    <option value="America/Mexico_City">América / Ciudad de México</option>
-                    <option value="America/Bogota">América / Bogotá</option>
-                    <option value="America/Santiago">América / Santiago</option>
-                    <option value="America/Argentina/Buenos_Aires">América / Buenos Aires</option>
-                    <option value="America/New_York">América / Nueva York</option>
-                    <option value="Europe/Madrid">Europa / Madrid</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Código de País</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.country_code}
-                    onChange={(e) => setFormData({ ...formData, country_code: e.target.value })}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
-                    placeholder="+51"
-                  />
-                </div>
-              </div>
             </div>
 
             <div>

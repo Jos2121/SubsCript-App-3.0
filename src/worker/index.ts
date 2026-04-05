@@ -183,22 +183,13 @@ app.get("/api/auth/me", async (c) => {
   try {
     const dbUser = c.get('jwtPayload') as any;
     let orgName = null;
-    let orgTimezone = 'America/Lima';
-    let orgCurrency = 'PEN';
-    let orgCountryCode = '+51';
-    
     if (dbUser.organization_id) {
-      const orgs = await sql`SELECT name, timezone, currency, country_code FROM organizations WHERE id = ${dbUser.organization_id} LIMIT 1`;
-      if (orgs.length > 0) {
-        orgName = orgs[0].name;
-        orgTimezone = orgs[0].timezone;
-        orgCurrency = orgs[0].currency;
-        orgCountryCode = orgs[0].country_code;
-      }
+      const orgs = await sql`SELECT name FROM organizations WHERE id = ${dbUser.organization_id} LIMIT 1`;
+      if (orgs.length > 0) orgName = orgs[0].name;
     }
     
     const { password_hash, ...safeUser } = dbUser;
-    return c.json({ user: { ...safeUser, organization_name: orgName, timezone: orgTimezone, currency: orgCurrency, country_code: orgCountryCode } });
+    return c.json({ user: { ...safeUser, organization_name: orgName } });
   } catch (error) {
     console.error(error);
     return c.json({ error: "Error interno del servidor" }, 500);
@@ -1164,7 +1155,7 @@ app.delete("/api/superadmin/saas-plans/:id", async (c) => {
 
 app.post("/api/superadmin/create-subscription", validateJson(SuperAdminCreateSubscriptionSchema), async (c) => {
   try {
-    const { name, email, phone, plan_id, organization_name, password, start_date, discount, timezone, currency, country_code } = c.req.valid('json');
+    const { name, email, phone, plan_id, organization_name, password, start_date, discount } = c.req.valid('json');
     
     return await sql.begin(async (tSql) => {
       const existing = await tSql`SELECT id FROM users WHERE email = ${email} LIMIT 1`;
@@ -1173,7 +1164,7 @@ app.post("/api/superadmin/create-subscription", validateJson(SuperAdminCreateSub
       if (plans.length === 0) return c.json({ error: "Plan no encontrado" }, 404);
       
       const plan = plans[0];
-      const org = await tSql`INSERT INTO organizations (name, timezone, currency, country_code) VALUES (${organization_name}, ${timezone || 'America/Lima'}, ${currency || 'PEN'}, ${country_code || '+51'}) RETURNING id`;
+      const org = await tSql`INSERT INTO organizations (name) VALUES (${organization_name}) RETURNING id`;
       const sDateStr = start_date || getLocalTodayString();
       let eDateStr;
       if (plan.duration_months) eDateStr = addMonthsToDateString(sDateStr, Number(plan.duration_months));

@@ -4,9 +4,6 @@ import z from "zod";
 export const OrganizationSchema = z.object({
   id: z.number(),
   name: z.string(),
-  timezone: z.string().default('America/Lima'),
-  currency: z.string().default('PEN'),
-  country_code: z.string().default('+51'),
   is_active: z.boolean(),
   created_at: z.string(),
   updated_at: z.string(),
@@ -168,9 +165,6 @@ export const SuperAdminCreateSubscriptionSchema = z.object({
   password: z.string().min(1, 'La contraseña es requerida'),
   start_date: z.string().optional(),
   discount: z.coerce.number().optional().default(0),
-  timezone: z.string().optional().default('America/Lima'),
-  currency: z.string().optional().default('PEN'),
-  country_code: z.string().optional().default('+51'),
 });
 
 export type LoginFormType = z.infer<typeof LoginSchema>;
