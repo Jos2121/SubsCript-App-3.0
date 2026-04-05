@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta property="og:title" content="Isites Pro"/>
+    <meta property="og:description" content="Plataforma de Gestión de Membresías"/>
+    <meta property="og:image" content="https://mocha-cdn.com/og.png" type="image/png"/>
+    <meta property="og:url" content="https://2yuzrmctvi67e.mocha.app"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:author" content="Isites Pro"/>
+    <meta property="og:site_name" content="Isites Pro"/>
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:site" content="@isitespro"/>
+    <meta property="twitter:title" content="Isites Pro"/>
+    <meta property="twitter:description" content="Plataforma de Gestión de Membresías"/>
+    <meta property="twitter:image" content="https://mocha-cdn.com/og.png" type="image/png"/>
+    <link rel="shortcut icon" href="https://mocha-cdn.com/favicon.ico" type="image/x-icon" id="dynamic-favicon"/>
+    <title>
+      Isites Pro
+    </title>
+    <!-- Script para prevenir el parpadeo del Favicon y Título cargándolos desde la caché instantáneamente -->
+    <script>
+      try {
+        var cachedSettings = localStorage.getItem('platform_settings_cache');
+        if (cachedSettings) {
+          var settings = JSON.parse(cachedSettings);
+          if (settings.page_title) document.title = settings.page_title;
+          if (settings.favicon_url) document.getElementById('dynamic-favicon').href = settings.favicon_url;
+        }
+      } catch(e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+    <script type="module" src="/src/react-app/main.tsx">
+    </script>
+  </body>
+</html>
