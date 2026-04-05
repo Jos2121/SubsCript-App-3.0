@@ -3,6 +3,7 @@ import { Users, DollarSign, AlertTriangle, BarChart3 } from 'lucide-react';
 import { useAuth, apiCall } from '@/react-app/hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Layout from '@/react-app/components/Layout';
+import { usePlatformSettings } from '@/react-app/hooks/usePlatformSettings';
 
 interface DashboardMetrics {
   plan_name: string;
@@ -25,6 +26,7 @@ interface DashboardMetrics {
 
 export default function AdminDashboard() {
   const { user } = useAuth();
+  const { settings } = usePlatformSettings();
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -71,7 +73,7 @@ export default function AdminDashboard() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
       </Layout>
     );
@@ -154,6 +156,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
+        {/* Tarjetas de Métricas - ¡Se mantienen los colores originales semánticos! */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
@@ -214,7 +217,7 @@ export default function AdminDashboard() {
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {yearOptions.map(year => (
                   <option key={year} value={year}>{year}</option>
@@ -239,7 +242,7 @@ export default function AdminDashboard() {
                   />
                   <Bar 
                     dataKey="earnings" 
-                    fill="#10B981" 
+                    fill={settings.primary_color || '#10B981'} 
                     radius={[4, 4, 0, 0]} 
                     barSize={40}
                   />
