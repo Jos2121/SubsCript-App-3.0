@@ -94,8 +94,8 @@ export default function AdminDashboard() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-blue-100 rounded-xl">
-                    <Target className="w-6 h-6 text-blue-600" />
+                  <div className="p-3 bg-[#DBEAFE] rounded-xl">
+                    <Target className="w-6 h-6 text-[#2563EB]" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900">Suscripciones</h3>
                 </div>
@@ -120,8 +120,8 @@ export default function AdminDashboard() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-green-100 rounded-xl">
-                    <Users className="w-6 h-6 text-green-600" />
+                  <div className="p-3 bg-[#D1FAE5] rounded-xl">
+                    <Users className="w-6 h-6 text-[#059669]" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900">Empleados</h3>
                 </div>
@@ -146,8 +146,8 @@ export default function AdminDashboard() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-purple-100 rounded-xl">
-                    <Award className="w-6 h-6 text-purple-600" />
+                  <div className="p-3 bg-[#F3E8FF] rounded-xl">
+                    <Award className="w-6 h-6 text-[#9333EA]" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900">Planes</h3>
                 </div>
@@ -175,8 +175,8 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <Users className="w-6 h-6 text-green-600" />
+              <div className="p-2 bg-[#D1FAE5] rounded-lg">
+                <Users className="w-6 h-6 text-[#059669]" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Suscripciones Activas</p>
@@ -187,8 +187,8 @@ export default function AdminDashboard() {
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <AlertTriangle className="w-6 h-6 text-red-600" />
+              <div className="p-2 bg-[#FEE2E2] rounded-lg">
+                <AlertTriangle className="w-6 h-6 text-[#DC2626]" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Suscripciones Vencidas</p>
@@ -199,8 +199,8 @@ export default function AdminDashboard() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <DollarSign className="w-6 h-6 text-blue-600" />
+              <div className="p-2 bg-[#DBEAFE] rounded-lg">
+                <DollarSign className="w-6 h-6 text-[#2563EB]" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ganancias del Día</p>
@@ -211,8 +211,8 @@ export default function AdminDashboard() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <DollarSign className="w-6 h-6 text-purple-600" />
+              <div className="p-2 bg-[#F3E8FF] rounded-lg">
+                <DollarSign className="w-6 h-6 text-[#9333EA]" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ganancias del Mes</p>
