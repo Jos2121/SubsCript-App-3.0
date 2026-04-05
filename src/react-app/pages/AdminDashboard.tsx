@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, DollarSign, AlertTriangle, BarChart3 } from 'lucide-react';
+import { Users, DollarSign, AlertTriangle, BarChart3, Target, Award, Ban, Clock } from 'lucide-react';
 import { useAuth, apiCall } from '@/react-app/hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Layout from '@/react-app/components/Layout';
@@ -93,7 +93,12 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">Suscripciones</h3>
+                <div className="flex items-center space-x-3">
+                  <div className="p-3 bg-blue-100 rounded-xl">
+                    <Target className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Suscripciones</h3>
+                </div>
                 <span className="text-sm text-gray-500">
                   {metrics.current_usage} / {metrics.plan_limit || '∞'}
                 </span>
@@ -114,7 +119,12 @@ export default function AdminDashboard() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">Empleados</h3>
+                <div className="flex items-center space-x-3">
+                  <div className="p-3 bg-green-100 rounded-xl">
+                    <Users className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Empleados</h3>
+                </div>
                 <span className="text-sm text-gray-500">
                   {metrics.employee_count} / {metrics.employee_limit || '∞'}
                 </span>
@@ -135,7 +145,12 @@ export default function AdminDashboard() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">Planes</h3>
+                <div className="flex items-center space-x-3">
+                  <div className="p-3 bg-purple-100 rounded-xl">
+                    <Award className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Planes</h3>
+                </div>
                 <span className="text-sm text-gray-500">
                   {metrics.plans_count} / {metrics.plan_creation_limit || '∞'}
                 </span>
@@ -156,7 +171,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Tarjetas de Métricas - ¡Se mantienen los colores originales semánticos! */}
+        {/* Tarjetas de Métricas Inferiores */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
