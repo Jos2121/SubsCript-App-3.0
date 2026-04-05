@@ -65,11 +65,10 @@ export default function Login() {
     }
   }
 
-  // Prevenir que se carguen los datos por defecto en el Login
   if (settingsLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 flex flex-col items-center justify-center p-4">
-        <Loader2 className="w-12 h-12 text-white animate-spin" />
+      <div className="min-h-screen bg-gradient-to-br from-primary/10 via-gray-50 to-secondary/10 flex flex-col items-center justify-center p-4">
+        <Loader2 className="w-12 h-12 text-primary animate-spin" />
       </div>
     );
   }
@@ -179,12 +178,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-gray-50 to-secondary/10 flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '4s' }}></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '4s' }}></div>
       </div>
 
       <div className="max-w-md w-full space-y-8 relative z-10">
@@ -195,24 +194,24 @@ export default function Login() {
               <img 
                 src={settings.logo_url} 
                 alt={settings.platform_name}
-                className="h-20 w-auto object-contain"
+                className="h-20 w-auto object-contain drop-shadow-sm"
               />
             </div>
           ) : (
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
-              <Building2 className="w-10 h-10 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-xl mb-6 transform hover:scale-110 transition-transform duration-300">
+              <Building2 className="w-10 h-10 text-primary" />
             </div>
           )}
-          <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">
+          <h2 className="text-4xl font-bold text-gray-900 mb-2 tracking-tight">
             {isSetupMode ? "¡Bienvenido!" : settings.platform_name}
           </h2>
-          <p className="text-blue-100 text-lg">
+          <p className="text-gray-600 text-lg">
             {isSetupMode ? "Iniciemos configurando tu sistema" : "Plataforma de gestión de suscripciones"}
           </p>
         </div>
 
         {/* Form Area */}
-        <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20">
+        <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/50">
           {isSetupMode ? (
             <form className="space-y-4" onSubmit={handleSetup}>
               <div className="text-center mb-6">
@@ -224,16 +223,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre completo
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <UserPlus className="h-5 w-5 text-gray-400" />
+                    <UserPlus className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="text"
                     required
                     value={setupData.name}
                     onChange={(e) => setSetupData({ ...setupData, name: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -243,16 +242,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Correo electrónico
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
+                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="email"
                     required
                     value={setupData.email}
                     onChange={(e) => setSetupData({ ...setupData, email: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="admin@empresa.com"
                   />
                 </div>
@@ -262,16 +261,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre de la Organización
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Building2 className="h-5 w-5 text-gray-400" />
+                    <Building2 className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="text"
                     required
                     value={setupData.organization_name}
                     onChange={(e) => setSetupData({ ...setupData, organization_name: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Isites Pro Global"
                   />
                 </div>
@@ -281,16 +280,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Contraseña
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400" />
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="password"
                     required
                     value={setupData.password}
                     onChange={(e) => setSetupData({ ...setupData, password: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Mínimo 6 caracteres"
                   />
                 </div>
@@ -305,7 +304,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={setupLoading}
-                className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-all"
               >
                 {setupLoading ? (
                   <>
@@ -328,7 +327,7 @@ export default function Login() {
                 </label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-blue-600 transition-colors" />
+                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     id="email"
@@ -338,7 +337,7 @@ export default function Login() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white hover:border-gray-400"
+                    className="block w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white hover:border-gray-400"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -350,7 +349,7 @@ export default function Login() {
                 </label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-blue-600 transition-colors" />
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     id="password"
@@ -360,7 +359,7 @@ export default function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-12 pr-12 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white hover:border-gray-400"
+                    className="block w-full pl-12 pr-12 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white hover:border-gray-400"
                     placeholder="Tu contraseña"
                   />
                   <button
@@ -386,7 +385,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] transition-all duration-200"
+                className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] transition-all duration-200"
               >
                 {loading ? (
                   <>
@@ -409,7 +408,7 @@ export default function Login() {
                       setShowRegister(true);
                       setError('');
                     }}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                    className="text-sm text-primary hover:opacity-80 font-medium transition-opacity"
                   >
                     ¿No tienes cuenta? Regístrate gratis
                   </button>
@@ -433,16 +432,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre completo
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <UserPlus className="h-5 w-5 text-gray-400" />
+                    <UserPlus className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="text"
                     required
                     value={registerData.name}
                     onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -452,16 +451,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Correo electrónico
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
+                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="email"
                     required
                     value={registerData.email}
                     onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -471,15 +470,15 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Teléfono
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone className="h-5 w-5 text-gray-400" />
+                    <Phone className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="tel"
                     value={registerData.phone}
                     onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="+51 999 999 999"
                   />
                 </div>
@@ -489,16 +488,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre de tu empresa
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Briefcase className="h-5 w-5 text-gray-400" />
+                    <Briefcase className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="text"
                     required
                     value={registerData.organization_name}
                     onChange={(e) => setRegisterData({ ...registerData, organization_name: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Mi Empresa"
                   />
                 </div>
@@ -508,16 +507,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Contraseña
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400" />
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="password"
                     required
                     value={registerData.password}
                     onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Mínimo 6 caracteres"
                   />
                 </div>
@@ -527,16 +526,16 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Confirmar contraseña
                 </label>
-                <div className="relative">
+                <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400" />
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-primary" />
                   </div>
                   <input
                     type="password"
                     required
                     value={registerData.confirmPassword}
                     onChange={(e) => setRegisterData({ ...registerData, confirmPassword: e.target.value })}
-                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Repite tu contraseña"
                   />
                 </div>
@@ -570,7 +569,7 @@ export default function Login() {
                 <button
                   type="submit"
                   disabled={registerLoading}
-                  className="flex-1 flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+                  className="flex-1 flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary to-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                 >
                   {registerLoading ? (
                     <>
@@ -591,7 +590,7 @@ export default function Login() {
 
         {/* Footer */}
         <div className="text-center mt-8">
-          <p className="text-blue-100 text-sm">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} {settings.platform_name}. Todos los derechos reservados.
           </p>
         </div>

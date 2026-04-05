@@ -145,9 +145,9 @@ export default function AdminClients() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'active': return 'bg-green-100 text-green-800 border-green-200';
-      case 'expiring': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'expiring': return 'bg-orange-100 text-orange-800 border-orange-200';
       case 'expired': return 'bg-red-100 text-red-800 border-red-200';
       case 'cancelled': return 'bg-gray-100 text-gray-800 border-gray-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
@@ -304,7 +304,7 @@ export default function AdminClients() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
       </Layout>
     );
@@ -322,21 +322,21 @@ export default function AdminClients() {
           <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
             <button
               onClick={() => setShowNewSubscriptionModal(true)}
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary w-full sm:w-auto transition-opacity"
             >
               <Plus className="w-4 h-4 mr-2" />
               Nueva Suscripción
             </button>
             <button
               onClick={() => setShowBulkSubscriptionModal(true)}
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary w-full sm:w-auto transition-opacity"
             >
               <Upload className="w-4 h-4 mr-2" />
               Añadir Masivamente
             </button>
             <button
               onClick={downloadTemplate}
-              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary w-full sm:w-auto"
             >
               <Download className="w-4 h-4 mr-2" />
               Plantilla
@@ -354,14 +354,14 @@ export default function AdminClients() {
                   placeholder="Buscar cliente, teléfono o plan..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
               
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
               >
                 <option value="all">Todos los estados</option>
                 <option value="pending">Pendientes</option>
@@ -374,7 +374,7 @@ export default function AdminClients() {
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
               >
                 <option value="recent">Más recientes</option>
                 <option value="asc">Nombre (A-Z)</option>
@@ -448,7 +448,7 @@ export default function AdminClients() {
                         
                         <button
                           onClick={() => setEditingSubscription(subscription)}
-                          className="text-blue-600 hover:text-blue-800 p-1"
+                          className="text-primary hover:opacity-80 p-1"
                           title="Editar"
                         >
                           <Edit className="w-4 h-4" />
@@ -822,7 +822,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 required
                 value={formData.customer_name}
                 onChange={(e) => setFormData({ ...formData, customer_name: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -833,7 +833,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 required
                 value={formData.customer_phone}
                 onChange={(e) => setFormData({ ...formData, customer_phone: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -843,7 +843,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 type="email"
                 value={formData.customer_email}
                 onChange={(e) => setFormData({ ...formData, customer_email: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -853,7 +853,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 required
                 value={formData.plan_id}
                 onChange={(e) => setFormData({ ...formData, plan_id: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               >
                 <option value="">Seleccionar plan...</option>
                 {plans.map((plan) => (
@@ -872,7 +872,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 step="0.01"
                 value={discount}
                 onChange={(e) => setDiscount(e.target.value === '' ? '' : parseFloat(e.target.value))}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
                 placeholder="0.00"
               />
               {formData.plan_id && (
@@ -889,7 +889,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
                 required
                 value={formData.start_date}
                 onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -908,7 +908,7 @@ function NewSubscriptionModal({ onClose, onSuccess, organizationId }: {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? 'Creando...' : 'Crear Suscripción'}
               </button>
@@ -1011,7 +1011,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
                 required
                 value={formData.customer_name}
                 onChange={(e) => setFormData({ ...formData, customer_name: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -1022,7 +1022,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
                 required
                 value={formData.customer_phone}
                 onChange={(e) => setFormData({ ...formData, customer_phone: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -1032,7 +1032,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
                 type="email"
                 value={formData.customer_email}
                 onChange={(e) => setFormData({ ...formData, customer_email: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -1041,7 +1041,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
               <select
                 value={formData.plan_id}
                 onChange={(e) => setFormData({ ...formData, plan_id: e.target.value })}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
               >
                 <option value="">Mantener plan actual ({subscription.plan_name})</option>
                 {plans.map((plan) => (
@@ -1053,17 +1053,17 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
             </div>
 
             {isPlanChanged && (
-              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 animate-slide-in">
-                <label className="block text-sm font-medium text-blue-900 mb-1">Monto cobrado por el cambio (S/)</label>
+              <div className="bg-primary/10 p-4 rounded-lg border border-primary/20 animate-slide-in">
+                <label className="block text-sm font-medium text-primary mb-1">Monto cobrado por el cambio (S/)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={formData.upgrade_amount}
                   onChange={(e) => setFormData({ ...formData, upgrade_amount: e.target.value })}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
                   placeholder="Ej. 50.00"
                 />
-                <p className="text-xs text-blue-700 mt-2">
+                <p className="text-xs text-primary mt-2">
                   Al ingresar un monto aquí, el cliente cambiará de plan pero mantendrá su fecha de inicio original. El nuevo vencimiento se calculará en base a esa fecha original.
                 </p>
               </div>
@@ -1076,7 +1076,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
                 value={formData.start_date}
                 onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
                 disabled={isPlanChanged && parseFloat(formData.upgrade_amount || '0') > 0}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary disabled:bg-gray-100 disabled:text-gray-500"
               />
             </div>
 
@@ -1095,7 +1095,7 @@ function EditSubscriptionModal({ subscription, onClose, onSuccess, organizationI
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? 'Actualizando...' : 'Actualizar'}
               </button>
@@ -1294,7 +1294,7 @@ function ExcelBulkModal({ onClose, onSuccess, organizationId }: {
             />
             <Upload className="mx-auto h-12 w-12 text-gray-400 mb-2" />
             {fileSelected ? (
-              <p className="text-sm text-blue-600 font-medium">{fileSelected}</p>
+              <p className="text-sm text-primary font-medium">{fileSelected}</p>
             ) : (
               <p className="text-sm text-gray-600">Haz clic o arrastra tu archivo Excel aquí</p>
             )}
@@ -1302,8 +1302,8 @@ function ExcelBulkModal({ onClose, onSuccess, organizationId }: {
         </div>
 
         {parsedRows.length > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <p className="text-sm text-blue-800">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6">
+            <p className="text-sm text-primary">
               Se han detectado <span className="font-bold">{parsedRows.length}</span> filas listas para procesar.
             </p>
           </div>
@@ -1333,7 +1333,7 @@ function ExcelBulkModal({ onClose, onSuccess, organizationId }: {
             type="button"
             onClick={handleSubmit}
             disabled={loading || parsedRows.length === 0}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-secondary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50"
           >
             {loading && (
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>

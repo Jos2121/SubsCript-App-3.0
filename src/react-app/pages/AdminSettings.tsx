@@ -379,7 +379,7 @@ export default function AdminSettings() {
     <Layout>
       <div className="space-y-6">
         <div className="flex items-center space-x-3">
-          <SettingsIcon className="w-8 h-8 text-blue-600" />
+          <SettingsIcon className="w-8 h-8 text-primary" />
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Configuraciones</h1>
             <p className="text-gray-600">Gestiona los planes, empleados y métodos de pago</p>
@@ -397,7 +397,7 @@ export default function AdminSettings() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap ${
                       activeTab === tab.id
-                        ? 'border-blue-500 text-blue-600'
+                        ? 'border-primary text-primary'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -412,7 +412,7 @@ export default function AdminSettings() {
           <div className="p-4 md:p-6">
             {loading ? (
               <div className="flex items-center justify-center h-32">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               </div>
             ) : (
               <>
@@ -422,7 +422,7 @@ export default function AdminSettings() {
                       <h3 className="text-lg font-medium text-gray-900">Planes de Suscripción</h3>
                       <button
                         onClick={() => setShowPlanForm(true)}
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:opacity-90 transition-opacity"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Nuevo Plan
@@ -449,7 +449,7 @@ export default function AdminSettings() {
                               
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div className="flex space-x-2">
-                                  <button onClick={() => handleEditPlan(plan)} className="text-blue-600 hover:text-blue-800 p-1">
+                                  <button onClick={() => handleEditPlan(plan)} className="text-primary hover:opacity-80 p-1">
                                     <Edit2 className="w-4 h-4" />
                                   </button>
                                   <button onClick={() => handleDeletePlan(plan)} className="text-red-600 hover:text-red-800 p-1">
@@ -471,7 +471,7 @@ export default function AdminSettings() {
                       <h3 className="text-lg font-medium text-gray-900">Empleados</h3>
                       <button
                         onClick={() => setShowEmployeeForm(true)}
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:opacity-90 transition-opacity"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Nuevo Empleado
@@ -496,7 +496,7 @@ export default function AdminSettings() {
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{employee.phone}</td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div className="flex space-x-2">
-                                  <button onClick={() => handleEditEmployee(employee)} className="text-blue-600 hover:text-blue-800 p-1">
+                                  <button onClick={() => handleEditEmployee(employee)} className="text-primary hover:opacity-80 p-1">
                                     <Edit2 className="w-4 h-4" />
                                   </button>
                                   <button onClick={() => handleDeleteEmployee(employee)} className="text-red-600 hover:text-red-800 p-1">
@@ -521,7 +521,7 @@ export default function AdminSettings() {
                       </div>
                       <button
                         onClick={() => setShowPaymentForm(true)}
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:opacity-90 transition-opacity"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Nuevo Método
@@ -534,7 +534,7 @@ export default function AdminSettings() {
                           <div className="flex justify-between items-start mb-3">
                             <h4 className="text-lg font-medium text-gray-900">{method.name}</h4>
                             <div className="flex space-x-1">
-                              <button onClick={() => handleEditPayment(method)} className="text-blue-600 hover:text-blue-800 p-1">
+                              <button onClick={() => handleEditPayment(method)} className="text-primary hover:opacity-80 p-1">
                                 <Edit2 className="w-4 h-4" />
                               </button>
                               <button onClick={() => handleDeletePaymentMethod(method)} className="text-red-600 hover:text-red-800 p-1">
@@ -578,7 +578,7 @@ export default function AdminSettings() {
                     required
                     value={planFormData.name}
                     onChange={(e) => setPlanFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -587,7 +587,7 @@ export default function AdminSettings() {
                   <select
                     value={planFormData.duration_months}
                     onChange={(e) => setPlanFormData(prev => ({ ...prev, duration_months: parseInt(e.target.value) }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   >
                     {Array.from({ length: 36 }, (_, i) => i + 1).map(month => (
                       <option key={month} value={month}>
@@ -605,7 +605,7 @@ export default function AdminSettings() {
                     required
                     value={planFormData.price}
                     onChange={(e) => setPlanFormData(prev => ({ ...prev, price: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -615,7 +615,7 @@ export default function AdminSettings() {
                     value={planFormData.benefits}
                     onChange={(e) => setPlanFormData(prev => ({ ...prev, benefits: e.target.value }))}
                     rows={3}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -631,7 +631,7 @@ export default function AdminSettings() {
                   >
                     Cancelar
                   </button>
-                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-primary hover:opacity-90 rounded-md transition-opacity">
                     Guardar
                   </button>
                 </div>
@@ -653,7 +653,7 @@ export default function AdminSettings() {
                     required
                     value={employeeFormData.name}
                     onChange={(e) => setEmployeeFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -664,7 +664,7 @@ export default function AdminSettings() {
                     required
                     value={employeeFormData.email}
                     onChange={(e) => setEmployeeFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -674,7 +674,7 @@ export default function AdminSettings() {
                     type="tel"
                     value={employeeFormData.phone}
                     onChange={(e) => setEmployeeFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -687,7 +687,7 @@ export default function AdminSettings() {
                     required={!editingEmployee}
                     value={employeeFormData.password}
                     onChange={(e) => setEmployeeFormData(prev => ({ ...prev, password: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -703,7 +703,7 @@ export default function AdminSettings() {
                   >
                     Cancelar
                   </button>
-                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-primary hover:opacity-90 rounded-md transition-opacity">
                     Guardar
                   </button>
                 </div>
@@ -725,7 +725,7 @@ export default function AdminSettings() {
                     required
                     value={paymentFormData.name}
                     onChange={(e) => setPaymentFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -734,7 +734,7 @@ export default function AdminSettings() {
                   <select
                     value={paymentFormData.type}
                     onChange={(e) => setPaymentFormData(prev => ({ ...prev, type: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   >
                     <option value="digital_wallet">Billetera Digital</option>
                     <option value="bank_account">Cuenta Bancaria</option>
@@ -748,7 +748,7 @@ export default function AdminSettings() {
                       type="url"
                       value={paymentFormData.qr_image_url}
                       onChange={(e) => setPaymentFormData(prev => ({ ...prev, qr_image_url: e.target.value }))}
-                      className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 )}
@@ -759,7 +759,7 @@ export default function AdminSettings() {
                     type="text"
                     value={paymentFormData.account_number}
                     onChange={(e) => setPaymentFormData(prev => ({ ...prev, account_number: e.target.value }))}
-                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -771,7 +771,7 @@ export default function AdminSettings() {
                         type="text"
                         value={paymentFormData.account_holder}
                         onChange={(e) => setPaymentFormData(prev => ({ ...prev, account_holder: e.target.value }))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                       />
                     </div>
                     <div>
@@ -780,7 +780,7 @@ export default function AdminSettings() {
                         type="text"
                         value={paymentFormData.bank_name}
                         onChange={(e) => setPaymentFormData(prev => ({ ...prev, bank_name: e.target.value }))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary focus:border-primary"
                       />
                     </div>
                   </>
@@ -805,7 +805,7 @@ export default function AdminSettings() {
                   >
                     Cancelar
                   </button>
-                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                  <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-primary hover:opacity-90 rounded-md transition-opacity">
                     Guardar
                   </button>
                 </div>

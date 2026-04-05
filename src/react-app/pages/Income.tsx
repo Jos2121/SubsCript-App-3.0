@@ -8,6 +8,7 @@ import { useToast } from '@/react-app/hooks/useToast';
 import ConfirmModal from '@/react-app/components/ConfirmModal';
 import Pagination from '@/react-app/components/Pagination';
 import { formatLocalDate } from '@/react-app/utils/dateUtils';
+import { usePlatformSettings } from '@/react-app/hooks/usePlatformSettings';
 
 interface IncomeSummary {
   month: string;
@@ -31,6 +32,7 @@ interface PaymentDetail {
 export default function Income() {
   const { user } = useAuth();
   const { showSuccess, showError } = useToast();
+  const { settings } = usePlatformSettings();
   
   const [summaryData, setSummaryData] = useState<IncomeSummary[]>([]);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetail[]>([]);
@@ -249,7 +251,7 @@ export default function Income() {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
       </Layout>
     );
@@ -278,8 +280,8 @@ export default function Income() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <TrendingUp className="w-6 h-6 text-blue-600" />
+              <div className="p-3 bg-primary/10 rounded-lg">
+                <TrendingUp className="w-6 h-6 text-primary" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ingresos Filtrados del Mes</p>
@@ -290,8 +292,8 @@ export default function Income() {
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-purple-100 rounded-lg">
-                <DollarSign className="w-6 h-6 text-purple-600" />
+              <div className="p-3 bg-secondary/10 rounded-lg">
+                <DollarSign className="w-6 h-6 text-secondary" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Ingresos Filtrados del Día</p>
@@ -323,7 +325,7 @@ export default function Income() {
                   />
                   <Bar 
                     dataKey="amount" 
-                    fill="#10B981" 
+                    fill={settings.primary_color || '#10B981'} 
                     radius={[4, 4, 0, 0]} 
                     barSize={40}
                   />
@@ -366,13 +368,13 @@ export default function Income() {
                     placeholder="Buscar cliente, organización, plan..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   />
                 </div>
                 <select
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm w-full sm:w-auto"
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-full sm:w-auto"
                 >
                   <option value="all">Todos los tipos</option>
                   <option value="new_subscription">Nueva Suscripción</option>
@@ -389,7 +391,7 @@ export default function Income() {
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="border border-gray-300 rounded bg-white focus:ring-2 focus:ring-blue-500 text-sm px-2 py-1 cursor-pointer"
+                    className="border border-gray-300 rounded bg-white focus:ring-2 focus:ring-primary text-sm px-2 py-1 cursor-pointer"
                   />
                 </div>
                 <div className="hidden sm:block text-gray-300">|</div>
@@ -399,7 +401,7 @@ export default function Income() {
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="border border-gray-300 rounded bg-white focus:ring-2 focus:ring-blue-500 text-sm px-2 py-1 cursor-pointer"
+                    className="border border-gray-300 rounded bg-white focus:ring-2 focus:ring-primary text-sm px-2 py-1 cursor-pointer"
                   />
                 </div>
                 {(startDate || endDate) && (
