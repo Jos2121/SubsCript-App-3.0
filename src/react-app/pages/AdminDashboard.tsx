@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, DollarSign, AlertTriangle, BarChart3, Target, Award, Ban, Clock } from 'lucide-react';
+import { Users, DollarSign, AlertTriangle, BarChart3, Target, Award } from 'lucide-react';
 import { useAuth, apiCall } from '@/react-app/hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Layout from '@/react-app/components/Layout';
