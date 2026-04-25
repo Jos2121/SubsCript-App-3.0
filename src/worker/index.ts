@@ -1008,6 +1008,31 @@ app.delete("/api/payments/:id", async (c) => {
   }
 });
 
+app.post("/api/payments/bulk-delete", async (c) => {
+  try {
+    const user = c.get('jwtPayload');
+    if (user.role === 'employee') return c.json({ error: "Los empleados no pueden borrar pagos" }, 403);
+    
+    const { ids } = await c.req.json();
+    if (!Array.isArray(ids) || ids.length === 0) return c.json({ error: "No se proporcionaron IDs" }, 400);
+
+    if (user.role !== 'superadmin') {
+      const payments = await sql`SELECT id, organization_id, is_platform_income FROM payments WHERE id IN ${sql(ids)}`;
+      for (const p of payments) {
+        if (p.organization_id !== user.organization_id || p.is_platform_income) {
+          return c.json({ error: "No autorizado para eliminar algunos de estos pagos" }, 403);
+        }
+      }
+    }
+
+    await sql`UPDATE payments SET status = 'cancelled' WHERE id IN ${sql(ids)}`;
+    return c.json({ message: "Eliminados lógicamente" });
+  } catch (error) {
+    console.error(error);
+    return c.json({ error: "Error interno del servidor" }, 500);
+  }
+});
+
 // DASHBOARD METRICS
 app.get("/api/admin/dashboard-metrics", async (c) => {
   try {

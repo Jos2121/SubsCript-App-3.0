@@ -45,6 +45,9 @@ export default function Income() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
+  // Estado de Selección Múltiple
+  const [selectedPayments, setSelectedPayments] = useState<number[]>([]);
+
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -62,9 +65,10 @@ export default function Income() {
     onConfirm: () => {}
   });
 
-  // Al cambiar un filtro, reseteamos a página 1 y ejecutamos la búsqueda en el backend
+  // Al cambiar un filtro, reseteamos a página 1 y limpiamos la selección
   useEffect(() => {
     setCurrentPage(1);
+    setSelectedPayments([]);
   }, [searchTerm, typeFilter, startDate, endDate]);
 
   useEffect(() => {
@@ -99,6 +103,8 @@ export default function Income() {
         if (data.pagination) {
           setTotalPages(data.pagination.totalPages || 1);
         }
+        // Limpiar selección al cambiar de página
+        setSelectedPayments([]);
       }
     } catch (error) {
       console.error('Error fetching income:', error);
@@ -124,6 +130,26 @@ export default function Income() {
     }
   };
 
+  const deleteSelectedPayments = async () => {
+    try {
+      const response = await apiCall('/api/payments/bulk-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: selectedPayments })
+      });
+      
+      if (response.ok) {
+        showSuccess('Éxito', 'Registros de ingreso eliminados');
+        setSelectedPayments([]);
+        fetchIncome();
+      } else {
+        showError('Error', 'No se pudieron eliminar los registros');
+      }
+    } catch (error) {
+      showError('Error', 'Error de conexión');
+    }
+  };
+
   const handleDeleteClick = (paymentId: number) => {
     setConfirmModal({
       isOpen: true,
@@ -134,6 +160,32 @@ export default function Income() {
         setConfirmModal(prev => ({ ...prev, isOpen: false }));
       }
     });
+  };
+
+  const handleBulkDeleteClick = () => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Confirmar eliminación múltiple',
+      message: `¿Estás seguro de que deseas eliminar ${selectedPayments.length} registros de ingreso? Esto afectará los totales calculados y no se puede deshacer.`,
+      onConfirm: () => {
+        deleteSelectedPayments();
+        setConfirmModal(prev => ({ ...prev, isOpen: false }));
+      }
+    });
+  };
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedPayments(paymentDetails.map(p => p.id));
+    } else {
+      setSelectedPayments([]);
+    }
+  };
+
+  const handleSelectRow = (id: number) => {
+    setSelectedPayments(prev => 
+      prev.includes(id) ? prev.filter(pId => pId !== id) : [...prev, id]
+    );
   };
 
   const formatCurrency = (amount: number | string) => {
@@ -247,7 +299,7 @@ export default function Income() {
     }
   };
 
-  if (loading) {
+  if (loading && paymentDetails.length === 0) {
     return (
       <Layout>
         <div className="flex items-center justify-center h-64">
@@ -349,14 +401,26 @@ export default function Income() {
                 <h3 className="text-lg font-semibold text-gray-900">Detalle de Ingresos</h3>
               </div>
               
-              <button
-                type="button"
-                onClick={exportToExcel}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Descargar Reporte Completo
-              </button>
+              <div className="flex items-center space-x-3">
+                {selectedPayments.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleBulkDeleteClick}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Eliminar Seleccionados ({selectedPayments.length})
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={exportToExcel}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Descargar Reporte Completo
+                </button>
+              </div>
             </div>
             
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -421,6 +485,14 @@ export default function Income() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-10">
+                    <input
+                      type="checkbox"
+                      className="rounded border-gray-300 text-primary focus:ring-primary"
+                      checked={paymentDetails.length > 0 && selectedPayments.length === paymentDetails.length}
+                      onChange={handleSelectAll}
+                    />
+                  </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
                   {user?.role === 'superadmin' ? (
                     <>
@@ -439,7 +511,15 @@ export default function Income() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {paymentDetails.map((payment) => (
-                  <tr key={payment.id} className="hover:bg-gray-50">
+                  <tr key={payment.id} className={`hover:bg-gray-50 ${selectedPayments.includes(payment.id) ? 'bg-blue-50/50' : ''}`}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <input
+                        type="checkbox"
+                        className="rounded border-gray-300 text-primary focus:ring-primary"
+                        checked={selectedPayments.includes(payment.id)}
+                        onChange={() => handleSelectRow(payment.id)}
+                      />
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {formatLocalDate(payment.payment_date || payment.created_at || '')}
                     </td>
