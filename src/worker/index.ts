@@ -263,7 +263,14 @@ app.get("/api/subscriptions", async (c) => {
     await sql`UPDATE subscriptions SET status = 'expired' WHERE organization_id = ${organizationId} AND status = 'active' AND end_date < ${todayStr}`;
 
     const searchCond = search ? sql` AND (c.name ILIKE ${'%' + search + '%'} OR c.phone ILIKE ${'%' + search + '%'} OR c.email ILIKE ${'%' + search + '%'} OR p.name ILIKE ${'%' + search + '%'})` : sql``;
-    const statusCond = statusFilter !== 'all' ? sql` AND s.status = ${statusFilter}` : sql``;
+    
+    const calcStatusSql = sql`
+      CASE
+        WHEN s.status = 'active' AND s.end_date >= DATE(${todayStr}) AND s.end_date <= (DATE(${todayStr}) + INTERVAL '3 days') THEN 'expiring'
+        ELSE s.status
+      END
+    `;
+    const statusCond = statusFilter !== 'all' ? sql` AND (${calcStatusSql}) = ${statusFilter}` : sql``;
 
     let orderByCond;
     if (sort === 'asc') orderByCond = sql`ORDER BY c.name ASC`;
